@@ -12,50 +12,45 @@ knitr::opts_chunk$set(echo = TRUE)
 # **CLUSTER ANALYSIS IN R ASSIGNMENT**
 
 ```{r}
-# Loaded library 
+# Load library 
 library(tidyverse)
-library(utils)
+library(googledrive) # Interact with files on Google Drive from R
+library(archive) # Connect and direct extraction for many archive formats
 library(factoextra)
 library(NbClust)
 library(cluster)
 ```
 
-Download the BetaMatrix.tsv data from: <https://drive.google.com/file/d/1tOdeLpEzhEcsDPU6Vz_dIQsV0UZy0bz> 0/view?usp=share_link. Base on value of 200 CpG sites, do the following requests:
+Download the BetaMatrix.tsv data from: https://drive.google.com/file/d/1tOdeLpEzhEcsDPU6Vz_dIQsV0UZy0bz0/view Base on value of 200 CpG sites, do the following requests:
 
 ```{r}
-# Specify URL where file is stored
-url <- "https://drive.google.com/file/d/1tOdeLpEzhEcsDPU6Vz_dIQsV0UZy0bz0&export=download"
-
-file <- basename(url)
-
-# Specify destination where file should be saved
-destfile <- "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data/COVID_assignment.tar.gz"
-
-# Apply download.file function in R
-download.file(url, destfile)
-
-untar(destfile, list = TRUE)
-
-.exdir <- "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data"
-dir.create(.exdir)
-tarfile <- file.path(.exdir, "COVID_assignment.tar")
-
-untar(tarfile, list = TRUE)
-
-# Extract the two TSV files from the tar archive
-tar_files <- tar(tarfile, files = c("SampleSheet.tsv.tsv", "BetaMatrix.tsv"))
-
-# Read the first TSV file into R as a data frame
-file1 <- read.table(tar_files[1], header = TRUE, sep = "\t")
-
-# Read the second TSV file into R as a data frame
-file2 <- read.table(tar_files[2], header = TRUE, sep = "\t")
-
+# Set the working directory to the folder
+setwd("C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data")
+getwd()
 ```
 
 ```{r}
+# Store the URL you have
+folder_url <- "https://drive.google.com/file/d/1tOdeLpEzhEcsDPU6Vz_dIQsV0UZy0bz0"
+
+## Identify this folder on Drive
+## Let googledrive know this is a file ID or URL, as opposed to file name
+folder <- drive_get(as_id(folder_url))
+folder
+```
+
+```{r}
+# Specify destination where file should be saved
+destfile <- "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data/COVID_assignment.tar"
+
+# Download file
+drive_download("COVID_assignment.tar", 
+               path = destfile,
+               overwrite = TRUE)
+```
+```{r}
 # Load data 
-tsv_betamatrix <- read_tsv("C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data/COVID/BetaMatrix.tsv") 
+tsv_betamatrix <- read_tsv(archive_read(destfile, "BetaMatrix.tsv")) 
 
 # Convert the tibble into a data frame
 data_tsv <- as.data.frame(tsv_betamatrix)
@@ -137,7 +132,7 @@ According to the three graphs above, the optimal k for each method is as follows
 ## 3. Draw clustering results from K-means clustering algorithm.
 
 ```{r}
-# Visualiztion of k-means clusters (k=2)
+## Visualiztion of k-means clusters (k=2)
 km = kmeans(dt_scale, center=2, nstart=20)
 fviz_cluster(km,
              dt_scale,
@@ -146,13 +141,13 @@ fviz_cluster(km,
              max.overlaps=Inf,
              show.clust.cent = TRUE,
              geom = "point", #Show points only
-             palette = "Set2", ggtheme = theme_minimal(),## Change the color palette and theme
+             palette = "Set2", ggtheme = theme_minimal(),# Change the color palette and theme
              main = "Cluster plot with 2 clusters k"
 )
 ```
 
 ```{r}
-# Visualiztion of k-means clusters (k=7)
+## Visualiztion of k-means clusters (k=7)
 km = kmeans(dt_scale, center=7, nstart=20)
 fviz_cluster(km,
              dt_scale,
@@ -161,7 +156,7 @@ fviz_cluster(km,
              max.overlaps=Inf,
              show.clust.cent = TRUE,
              geom = "point", #Show points only
-             palette = "Set2", ggtheme = theme_minimal(),## Change the color palette and theme
+             palette = "Set2", ggtheme = theme_minimal(),# Change the color palette and theme
              main = "Cluster plot with 7 clusters k"
 )
 ```
