@@ -44,10 +44,14 @@ folder
 destfile <- "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data/COVID_assignment.tar"
 
 # Download file
-drive_download("COVID_assignment.tar", 
+downloaded_file <- drive_download("COVID_assignment.tar", 
                path = destfile,
                overwrite = TRUE)
+
+# See local path to new file
+downloaded_file$local_path
 ```
+
 ```{r}
 # Load data 
 tsv_betamatrix <- read_tsv(archive_read(destfile, "BetaMatrix.tsv")) 
