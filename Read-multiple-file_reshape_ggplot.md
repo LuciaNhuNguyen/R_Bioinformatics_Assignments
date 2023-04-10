@@ -94,11 +94,11 @@ data_melt_summary_tools_overlap_filter
 data_melt_summary_tools_overlap_filter %>% 
   ggplot(aes(x=Tools, y=value, fill=variable)) +
   geom_bar(stat="identity", position=position_dodge()) +
-  labs(title="Mean and Median number of SNPs identified by different Tools", x="Tools", y="Number of overlapped SNPs") +
+  labs(title="Mean and Median number of SNPs identified by different Tools", x="Tools", y="Number of overlapped SNPs", fill = "Variable") +
   theme(plot.title = element_text(size = 12, face = "bold")) +
-  scale_y_continuous(breaks = c(25000, 100000, 200000, 700000)) +
   theme_classic()
 ```
+
 ## 3. Plot barplot with X axis is Cases and Y axis is number of overlapped SNP of FreeBayes/Mutect2/Strelka
 ```{r}
 # Create a barplot with X axis is Cases and Y axis is number of SNP
