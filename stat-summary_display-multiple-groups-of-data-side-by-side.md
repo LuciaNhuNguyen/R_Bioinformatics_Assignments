@@ -56,9 +56,9 @@ print(data_csv_long)
 summary(data_csv_long)
 ```
 
-## 2. Compute and plot the mean and median of number of SNP of FreeBayes, Mutect2, Strelka.
+## 2. Compute and plot the mean and median of number of SNPs of FreeBayes, Mutect2, Strelka.
 
-### Compute the mean and median of number of SNP of FreeBayes, Mutect2, Strelka.
+### Compute the mean and median of number of SNPs of FreeBayes, Mutect2, Strelka.
 
 #### Method 1:
 
@@ -99,7 +99,7 @@ data_summary <- data_csv_long %>%
 data_summary
 ```
 
-### Plot the mean and median of number of SNP of FreeBayes, Mutect2, Strelka.
+### Plot the mean and median of number of SNPs of FreeBayes, Mutect2, Strelka.
 
 ```{r}
 # Reshape a data frame to 'wide' format
@@ -120,7 +120,7 @@ data_melt %>% ggplot(aes(x=Tools, y=value, fill=variable)) +
 ## 3. Plot barplot with X axis is Cases and Y axis is number of SNPs of FreeBayes, Mutect2, Strelka.
 
 ```{r}
-# Create a barplot with X axis is Cases and Y axis is number of SNP
+# Create a barplot with X axis is Cases and Y axis is number of SNPs
 data_csv_long %>% 
   mutate(Number = as.numeric(gsub("Case", "", Cases))) %>%
   mutate(Cases = reorder(Cases, Number)) %>% # reorder
@@ -134,7 +134,7 @@ In this example, we are creating a bar chart using the `SNPs_before_filter` data
 
 In `ggplot2`, `position_dodge` is a positioning option that is commonly used to **display multiple groups of data side by side**, particularly in bar charts. When `position_dodge` is applied, the bars for each group are placed adjacent to each other, rather than overlapping.
 
-## 4. Plot boxplot with X axis is FreeBayes, Mutect2, Strelka and Y axis is number of SNP
+## 4. Plot boxplot with X axis is FreeBayes, Mutect2, Strelka and Y axis is number of SNPs.
 
 ```{r}
 # Create a boxplot for each tools
