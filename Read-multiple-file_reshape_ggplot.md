@@ -70,7 +70,7 @@ names(data_melt_tools_overlap_filter)[3] <- "SNPs"
 # View the melt data frame
 data_melt_tools_overlap_filter
 ```
-## 2. Compute and plot the mean and median of number of overlapped SNP of Mutect2/FreeBayes, MuTect2/Strelka, FreeBayes/Mutect2/Strelka.
+## 2. Compute and plot the mean and median of number of overlapped SNPs of Mutect2/FreeBayes, MuTect2/Strelka, FreeBayes/Mutect2/Strelka.
 ```{r}
 data_summary_tools_overlap_filter <- data_melt_tools_overlap_filter %>%
   group_by(Tools) %>%
@@ -99,9 +99,9 @@ data_melt_summary_tools_overlap_filter %>%
   theme_classic()
 ```
 
-## 3. Plot barplot with X axis is Cases and Y axis is number of overlapped SNP of FreeBayes/Mutect2/Strelka.
+## 3. Plot barplot with X axis is Cases and Y axis is number of overlapped SNPs of FreeBayes/Mutect2/Strelka.
 ```{r}
-# Create a barplot with X axis is Cases and Y axis is number of SNP
+# Create a barplot with X axis is Cases and Y axis is number of SNPs
 data_melt_tools_overlap_filter %>%
   filter(Tools == "FreeBayes.Mutect2.Strelka") %>%
   mutate(Number = as.numeric(gsub("Case_", "", Cases))) %>%
