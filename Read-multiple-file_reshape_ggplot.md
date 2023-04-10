@@ -112,7 +112,7 @@ data_melt_tools_overlap_filter %>%
   theme(plot.title = element_text(size = 12, face = "bold")) +
   theme_classic()
 ```
-The `stat` parameter specifies the statistical transformation to apply to the data before plotting. In the case of `geom_bar()`, `stat="identity`" means that the height of each bar in the chart represents the actual count or value of the data, rather than any statistical summary such as the mean or median.
+The `stat` parameter specifies the statistical transformation to apply to the data before plotting. In the case of `geom_bar()`, `stat="identity"` means that the height of each bar in the chart represents the actual count or value of the data, rather than any statistical summary such as the mean or median.
 
 ## 4. Plot boxplot with X axis is Mutect2/FreeBayes, Mutect2/Strelka,  FreeBayes/Mutect2/Strelka and Y axis is number of overlapped SNP
 ```{r}
