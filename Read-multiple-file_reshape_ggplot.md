@@ -52,7 +52,7 @@ str(tools_overlap_filter_combine)
 ```{r}
 # Check and remove NA 
 colSums(is.na(tools_overlap_filter_combine))
-data_rm <- na.omit(tools_overlap_filter_combine)
+tools_overlap_filter_combine <- na.omit(tools_overlap_filter_combine)
 head(tools_overlap_filter_combine)
 ```
 
