@@ -63,7 +63,7 @@ str(data_combine)
 # Check and remove NA 
 colSums(is.na(data_combine))
 data_rm <- na.omit(data_combine)
-head(data_combine)
+head(data_rm)
 ```
 
 ### 1.1 Plot PCA following subtypes.
