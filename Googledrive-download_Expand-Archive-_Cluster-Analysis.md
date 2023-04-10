@@ -64,7 +64,7 @@ str(data_tsv)
 # Check and remove NA 
 colSums(is.na(data_tsv))
 data_rm <- na.omit(data_tsv)
-head(data_tsv)
+head(data_rm)
 ```
 
 ```{r}
