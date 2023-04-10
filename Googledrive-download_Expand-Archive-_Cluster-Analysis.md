@@ -4,11 +4,6 @@ author: "Quynh Nhu Nguyen"
 date: "2023-04-05"
 output: html_document
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # **CLUSTER ANALYSIS IN R ASSIGNMENT**
 
 ```{r}
@@ -23,11 +18,11 @@ library(cluster)
 
 Download the BetaMatrix.tsv data from: https://drive.google.com/file/d/1tOdeLpEzhEcsDPU6Vz_dIQsV0UZy0bz0/view Base on value of 200 CpG sites, do the following requests:
 
-```{r}
-# Set the working directory to the folder
-setwd("C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data")
-getwd()
+```{r setup, include=FALSE}
+# Set the root directory for notebook chunks
+knitr::opts_knit$set(root.dir = "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2023/Data")
 ```
+This will set the working directory to the location of the data files and set the root directory for notebook chunks to the location of the project folder. This way, you can avoid the warning message and ensure that your working directory is always set to the correct location.
 
 ```{r}
 # Store the URL you have
@@ -45,7 +40,7 @@ destfile <- "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/NGS3-W9-19-03-2
 
 # Download file
 downloaded_file <- drive_download("COVID_assignment.tar", 
-               path = destfile,
+               path = destfile, # The location of output file
                overwrite = TRUE)
 
 # See local path to new file
@@ -87,7 +82,7 @@ dist.ma
 ```
 
 ```{r}
-#Perform hierarchical clustering
+# Perform hierarchical clustering
 hc <- hclust(dist.ma, method="complete")
 fviz_dend(hc, k=3,
           k_color=c("darkorange", "purple", "cyan3"),
