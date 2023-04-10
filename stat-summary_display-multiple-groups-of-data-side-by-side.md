@@ -18,7 +18,7 @@ library(reshape) # reshape a data frame to 'wide' format
 knitr::opts_knit$set(root.dir = "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/exam_data/exam_data")
 ```
 
-## 1. Read file "SNPs_before_filter.csv" into R
+## 1. Read file "SNPs_before_filter.csv" into R.
 
 ```{r}
 # Load data 
@@ -56,9 +56,9 @@ print(data_csv_long)
 summary(data_csv_long)
 ```
 
-## 2. Compute and plot the mean and median of number of SNP of FreeBayes, Mutect2, Strelka
+## 2. Compute and plot the mean and median of number of SNP of FreeBayes, Mutect2, Strelka.
 
-### Compute the mean and median of number of SNP of FreeBayes, Mutect2, Strelka
+### Compute the mean and median of number of SNP of FreeBayes, Mutect2, Strelka.
 
 #### Method 1:
 
@@ -99,7 +99,7 @@ data_summary <- data_csv_long %>%
 data_summary
 ```
 
-### Plot the mean and median of number of SNP of FreeBayes, Mutect2, Strelka
+### Plot the mean and median of number of SNP of FreeBayes, Mutect2, Strelka.
 
 ```{r}
 # Reshape a data frame to 'wide' format
@@ -117,7 +117,7 @@ data_melt %>% ggplot(aes(x=Tools, y=value, fill=variable)) +
   theme_classic()
 ```
 
-## 3. Plot barplot with X axis is Cases and Y axis is number of SNPs of FreeBayes, Mutect2, Strelka
+## 3. Plot barplot with X axis is Cases and Y axis is number of SNPs of FreeBayes, Mutect2, Strelka.
 
 ```{r}
 # Create a barplot with X axis is Cases and Y axis is number of SNP
