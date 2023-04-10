@@ -5,6 +5,7 @@ date: "2023-04-09"
 output: html_document
 ---
 # **READ MULTIPLE FILES, RESHAPE AND PLOT**
+
 ```{r}
 # Load library 
 library(tidyverse)
@@ -56,13 +57,13 @@ head(tools_overlap_filter_combine)
 ```
 
 ```{r}
-# Move the "subtype" column to 1st column
+# Move the "Cases" column to 1st column
 tools_overlap_filter_combine <- tools_overlap_filter_combine[, c(5, 1:4)]
 
 # Reshape the data frame into a "long" format with separate columns for the tool and its values
 data_melt_tools_overlap_filter<- reshape2::melt(tools_overlap_filter_combine)
 
-# rename the first column
+# Rename the first column
 names(data_melt_tools_overlap_filter)[2] <- "Tools"
 names(data_melt_tools_overlap_filter)[3] <- "SNPs"
 
@@ -75,6 +76,8 @@ data_summary_tools_overlap_filter <- data_melt_tools_overlap_filter %>%
   group_by(Tools) %>%
   summarize(mean = mean(SNPs), median = median(SNPs)) %>%
   as.data.frame()
+  
+# View the statistical summary data
 data_summary_tools_overlap_filter
 ```
 
@@ -85,8 +88,9 @@ data_melt_summary_tools_overlap_filter <- reshape2::melt(data_summary_tools_over
 # View the melt data frame
 data_melt_summary_tools_overlap_filter
 ```
-# Create a boxplot with the mean and median values for each tools
+
 ```{r}
+# Create a boxplot with the mean and median values for each tools
 data_melt_summary_tools_overlap_filter %>% 
   ggplot(aes(x=Tools, y=value, fill=variable)) +
   geom_bar(stat="identity", position=position_dodge()) +
