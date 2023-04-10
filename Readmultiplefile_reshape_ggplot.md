@@ -11,11 +11,14 @@ library(tidyverse)
 library(data.table)
 library(reshape) # reshape a data frame to 'wide' format
 ```
+
+```{r setup, include=FALSE}
+# Set the root directory for notebook chunks
+knitr::opts_knit$set(root.dir = "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/exam_data/exam_data")
+```
+
 ## 1. Read file “tools_overlap_filter_1.csv” to “tools_overlap_filter_11.csv” into R and merge them into a single data frame
 ```{r}
-# Set the working directory to the folder containing the files
-setwd("C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/exam_data/exam_data")
-
 # Create an empty list to store the data frames
 tools_overlap_filter_list <- list()
 
