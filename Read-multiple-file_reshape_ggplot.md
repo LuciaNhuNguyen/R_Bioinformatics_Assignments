@@ -18,7 +18,7 @@ library(reshape) # reshape a data frame to 'wide' format
 knitr::opts_knit$set(root.dir = "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/exam_data/exam_data")
 ```
 
-## 1. Read file “tools_overlap_filter_1.csv” to “tools_overlap_filter_11.csv” into R and merge them into a single data frame
+## 1. Read file “tools_overlap_filter_1.csv” to “tools_overlap_filter_11.csv” into R and merge them into a single data frame.
 ```{r}
 # Create an empty list to store the data frames
 tools_overlap_filter_list <- list()
@@ -70,7 +70,7 @@ names(data_melt_tools_overlap_filter)[3] <- "SNPs"
 # View the melt data frame
 data_melt_tools_overlap_filter
 ```
-## 2. Compute and plot the mean and median of number of overlapped SNP of Mutect2/FreeBayes, MuTect2/Strelka, FreeBayes/Mutect2/Strelka
+## 2. Compute and plot the mean and median of number of overlapped SNP of Mutect2/FreeBayes, MuTect2/Strelka, FreeBayes/Mutect2/Strelka.
 ```{r}
 data_summary_tools_overlap_filter <- data_melt_tools_overlap_filter %>%
   group_by(Tools) %>%
@@ -99,7 +99,7 @@ data_melt_summary_tools_overlap_filter %>%
   theme_classic()
 ```
 
-## 3. Plot barplot with X axis is Cases and Y axis is number of overlapped SNP of FreeBayes/Mutect2/Strelka
+## 3. Plot barplot with X axis is Cases and Y axis is number of overlapped SNP of FreeBayes/Mutect2/Strelka.
 ```{r}
 # Create a barplot with X axis is Cases and Y axis is number of SNP
 data_melt_tools_overlap_filter %>%
@@ -114,7 +114,7 @@ data_melt_tools_overlap_filter %>%
 ```
 The `stat` parameter specifies the statistical transformation to apply to the data before plotting. In the case of `geom_bar()`, `stat="identity"` means that the height of each bar in the chart represents the actual count or value of the data, rather than any statistical summary such as the mean or median.
 
-## 4. Plot boxplot with X axis is Mutect2/FreeBayes, Mutect2/Strelka,  FreeBayes/Mutect2/Strelka and Y axis is number of overlapped SNP
+## 4. Plot boxplot with X axis is Mutect2/FreeBayes, Mutect2/Strelka,  FreeBayes/Mutect2/Strelka and Y axis is number of overlapped SNPs.
 ```{r}
 # Create a boxplot for each tools
 data_melt_tools_overlap_filter %>%
