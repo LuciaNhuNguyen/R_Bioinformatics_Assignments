@@ -40,7 +40,7 @@ head(data_csv)
 ```
 
 ```{r}
-# rename the first column
+# Rename the first column
 names(data_csv)[1] <- "Cases"
 ```
 
@@ -89,6 +89,7 @@ median
 In R, data frames are represented as two-dimensional objects, with rows and columns. The `[i, j]` notation can be used to select individual elements of a data frame, where i is the row index and j is the column index. The `[, j]` notation can be used to select an entire column of a data frame, where j is the column index. By using the `[-1]` notation instead of the `[1]` notation, we are indicating that we want to exclude the first column rather than include it.
 
 #### Method 3:
+
 ```{r}
 data_summary <- data_csv_long %>%
   group_by(Tools) %>%
@@ -100,7 +101,7 @@ data_summary
 ### Plot the mean and median of number of SNP of FreeBayes, Mutect2, Strelka
 
 ```{r}
-# Reshape a data frame to 'wide' formatl
+# Reshape a data frame to 'wide' format
 data_melt <- melt(data_summary)
 data_melt
 ```
@@ -111,6 +112,7 @@ data_melt %>% ggplot(aes(x=Tools, y=value, fill=variable)) +
   geom_bar(stat="identity", position=position_dodge()) +
   labs(title="Mean and Median number of SNPs identified by different Tools", x="Tools", y="Number of SNPs") +
   theme(plot.title = element_text(size = 12, face = "bold")) +
+  scale_y_continuous(breaks = c(25000, 100000, 200000, 700000)) +
   theme_classic()
 ```
 
@@ -118,24 +120,30 @@ data_melt %>% ggplot(aes(x=Tools, y=value, fill=variable)) +
 
 ```{r}
 # Create a barplot with X axis is Cases and Y axis is number of SNP
-data_csv_long %>% ggplot(aes(x=Cases, y=SNPs, fill=Tools)) +
+data_csv_long %>% 
+  mutate(Number = as.numeric(gsub("Case", "", Cases))) %>%
+  mutate(Cases = reorder(Cases, Number)) %>% # reorder
+  ggplot(aes(x=Cases, y=SNPs, fill=Tools)) +
   geom_bar(stat="identity", position=position_dodge()) +
   labs(title="Number of SNPs identified by different Tools", x="Cases", y="Number of SNPs") +
   theme(plot.title = element_text(size = 12, face = "bold")) +
   theme_classic()
 ```
-
 In this example, we are creating a bar chart using the `SNPs_before_filter` dataset included in the `ggplot2` package. We are mapping the `Cases` variable to the x-axis, the `SNPs` variable to the y-axis, and the `Tools` variable to the fill. We are using `geom_bar` to create the bars, and setting the `stat` parameter to `"identity"` to plot the actual values rather than a summary statistic. Finally, we are setting the position parameter to `position_dodge()` to place the bars side by side.
 
 In `ggplot2`, `position_dodge` is a positioning option that is commonly used to **display multiple groups of data side by side**, particularly in bar charts. When `position_dodge` is applied, the bars for each group are placed adjacent to each other, rather than overlapping.
 
 ## 4. Plot boxplot with X axis is FreeBayes, Mutect2, Strelka and Y axis is number of SNP
+
 ```{r}
 # Create a boxplot for each tools
-ggplot(data_csv_long, aes(x=Tools, y=SNPs)) +
+data_csv_long %>%
+  mutate(Tools = reorder(Tools, SNPs, fun = "median")) %>% # reorder
+  ggplot(aes(x=Tools, y=SNPs)) +
   geom_boxplot(fill="lightblue", alpha=0.5, na.rm = TRUE) +
   stat_summary(fun.y="mean", geom="point", shape=18, size=4, color="blue", na.rm = TRUE) +
   stat_summary(fun.y="median", geom="point", shape=18, size=4, color="red", na.rm = TRUE) +
+  scale_y_continuous(breaks = c(25000, 100000, 200000, 700000)) +
   labs(title="Number of SNPs identified by different Tools", x="Tools", y="Number of SNPs") +
   theme(plot.title = element_text(size = 12, face = "bold")) +
   theme_bw()
