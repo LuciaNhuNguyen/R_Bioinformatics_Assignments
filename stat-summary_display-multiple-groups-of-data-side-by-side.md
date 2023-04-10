@@ -5,16 +5,17 @@ date: "2023-04-08"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # **RESHAPE AND PLOT**
 
 ```{r}
 # Load library 
 library(tidyverse)
 library(reshape) # reshape a data frame to 'wide' format
+```
+
+```{r setup, include=FALSE}
+# Set the root directory for notebook chunks
+knitr::opts_knit$set(root.dir = "C:/Users/lucia/Downloads/Lecturer from Dr. Loi/NGS3/exam_data/exam_data")
 ```
 
 ## 1. Read file "SNPs_before_filter.csv" into R
