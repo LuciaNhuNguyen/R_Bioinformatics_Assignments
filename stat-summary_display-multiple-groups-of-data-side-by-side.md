@@ -36,7 +36,7 @@ str(data_csv)
 ```{r}
 # Check and remove NA 
 colSums(is.na(data_csv))
-data_rm <- na.omit(data_csv)
+data_csv <- na.omit(data_csv)
 head(data_csv)
 ```
 
