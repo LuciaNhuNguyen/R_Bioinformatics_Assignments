@@ -66,7 +66,7 @@ data_rm <- na.omit(data_combine)
 head(data_combine)
 ```
 
-### 1.1 Plot PCA following subtypes
+### 1.1 Plot PCA following subtypes.
 
 ```{r}
 # Numeric data 
@@ -99,7 +99,7 @@ ggplot(data_PCA, aes(x = PC1, y = PC2, col=subtype)) + geom_point(size=4, alpha=
   labs(x="PC1 (35.9%) ", y="PC1 (17.6%)", title="DNA methylation")
 ```
 
-### 1.2 Plot heatmap between four subtypes FA, FC, NIFTP and fv
+### 1.2 Plot heatmap between four subtypes FA, FC, NIFTP and fv.
 
 ```{r}
 # Convert the "subtype" column to a factor
@@ -188,7 +188,7 @@ draw(ht_list, ht_gap = unit(1, "mm"))
 
 ## 2. DATA "STUDENTS' PERFORMANCE"
 
-### Prepare data
+### Prepare data.
 
 ```{r}
 # Load data 
@@ -210,7 +210,7 @@ data_rm_data2 <- na.omit(data_csv)
 head(data_csv)
 ```
 
-### 2.1 Plot PCA:
+### 2.1 Plot PCA.
 
 ```{r}
 # Numeric data 
@@ -246,7 +246,7 @@ ggplot(data_PCA_data2, aes(x = PC1, y = PC2, col=race)) + geom_point(size=4, alp
   theme(plot.title = element_text(face="bold",size=12, hjust =0.5, colour = "purple"))
 ```
 
-### 2.2 Plot heat:
+### 2.2 Plot heat.
 
 ```{r}
 # Plot heat following gender
